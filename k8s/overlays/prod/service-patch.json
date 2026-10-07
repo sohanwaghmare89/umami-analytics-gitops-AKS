@@ -1,0 +1,18 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/ports",
+    "value": [
+      {
+        "name": "http",
+        "port": 3000,
+        "protocol": "TCP",
+        "targetPort": 3000
+      }
+    ]
+  },
+  {
+    "op": "remove",
+    "path": "/spec/selector"
+  }
+]
