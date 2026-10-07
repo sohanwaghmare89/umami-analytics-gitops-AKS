@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: umami-vm-svc
+  namespace: umami
+
+spec:
+  selector:
+    app: umami-vm
+
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
