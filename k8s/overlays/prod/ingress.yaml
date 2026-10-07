@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: umami-ingress
+  namespace: umami
+
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - umami.mydomain.com
+      secretName: mytls-tls
+
+  rules:
+    - host: umami.mydomain.com
+
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+
+            backend:
+              service:
+                name: umami-vm-svc
+
+                port:
+                  number: 3000
